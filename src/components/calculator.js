@@ -1,52 +1,154 @@
 import React, {Component} from 'react';
-import {Button,TextInput,View} from 'react-native';
-
-
-export default class Calculator extends Component {
+import {Button,TextInput,StyleSheet,Pressable,View,Text} from 'react-native';
+export default class Calculator extends React.Component {
     constructor(props)
     {
-        super(props);
-        this.state={Num1:0,Num2:0};
+      super(props);
+      this.state={primary:0,secondary:0};
     }
-    
     Sum =() =>{
-        var N1= parseInt(this.state.Num1);
-        var N2= parseInt(this.state.Num2);
+        var N1= parseInt(this.state.primary);
+        var N2= parseInt(this.state.secondary);
         var Results = N1+N2;
-        alert(Results);
+        this.setState({myText: Results})
+
     }
     
     Subtract =() =>{
-        var N1= parseInt(this.state.Num1);
-        var N2= parseInt(this.state.Num2);
+        var N1= parseInt(this.state.primary);
+        var N2= parseInt(this.state.secondary);
         var Results = N1-N2;
-        alert(Results);
+        this.setState({myText: Results})
     }
 
     Multiply =() =>{
-        var N1= parseInt(this.state.Num1);
-        var N2= parseInt(this.state.Num2);
+        var N1= parseInt(this.state.primary);
+        var N2= parseInt(this.state.secondary);
         var Results = N1*N2;
-        alert(Results);
+        this.setState({myText: Results})
     }
 
     Divide =() =>{
-        var N1= parseInt(this.state.Num1);
-        var N2= parseInt(this.state.Num2);
-        var Results = N1/N2;
-        alert(Results);
+        var N1= parseInt(this.state.primary);
+        var N2= parseInt(this.state.secondary);
+        var Results = parseInt(N1/N2);
+        this.setState({myText: Results})
     }
 
-    render() {
+    updateResult = () => {
+        this.setState({Results})
+     }
+    render(){
         return (
-        <View>
-            <TextInput style={{borderWidth:1,margin:10}} placeholder="Num1" onChangeText={Num1=>this.setState({Num1})}/>
-            <TextInput style={{borderWidth:1,margin:10}} placeholder="Num2" onChangeText={Num2=>this.setState({Num2})}/>
-            <Button title="Sum" onPress={this.Sum}/>
-            <Button title="Subtract" onPress={this.Subtract}/>
-            <Button title="Multiply" onPress={this.Multiply}/>
-            <Button title="Divide" onPress={this.Divide}/>
-        </View>
-    );
-  }
+
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <Text style={styles.title}> Sample Calculator Application </Text>
+                </View>
+
+                <View style={styles.inputContainer}>
+                    <TextInput style={styles.textInput} placeholder=" First value" keyboardType='numeric' onChangeText={primary=>this.setState({primary})} />
+                    <TextInput style={styles.textInput} placeholder=" Second value" keyboardType='numeric' onChangeText={secondary=>this.setState({secondary})}/>
+                </View>
+              
+                <Text style={styles.result}>
+                  {this.state.myText}
+                </Text>
+                <View style={styles.operations}>
+                    <Pressable style={styles.button} onPress={this.Sum}>
+                        <Text style={styles.text}>+</Text>
+                    </Pressable>
+
+                    <Pressable style={styles.button} onPress={this.Subtract}>
+                        <Text style={styles.text}>-</Text>
+                    </Pressable>
+
+                    <Pressable style={styles.button} onPress={this.Multiply}>
+                        <Text style={styles.text}>×</Text>
+                    </Pressable>
+
+                    <Pressable style={styles.button} onPress={this.Divide}>
+                        <Text style={styles.text}>÷</Text>
+                    </Pressable>
+                </View>
+                </View>
+        );
+    }
 }
+const styles = StyleSheet.create({
+    container:{
+        display: 'flex',
+        justifyContent:'center',
+        alignItems: 'center',
+    },
+    textInput: {
+        borderWidth:1,
+        margin:10,
+        borderRadius:4,
+        width: 300,
+        fontFamily: 'monospace',
+        textAlign: 'center',
+        color: '#1183ca',
+        fontSize: 20,
+
+
+    },
+    
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 20,
+        paddingHorizontal: 20,
+        borderRadius: 4,
+        elevation: 15,
+        margin: 10,
+        backgroundColor: '#1183ca',
+        width: 300,
+        verticalSlign: 'middle',
+        fontFamily: 'monospace',
+    },
+
+    operations: {
+
+    },
+    
+    text: {
+        fontSize: 24,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
+    },
+    
+    title: {
+        fontSize: 21,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#1183ca',
+        margin: 10,
+        fontFamily: 'monospace',
+    },
+    header: {
+        height: '10%',
+        width: '100%',
+    },
+    inputContainer: {
+        alignItems: 'flex-end',
+    },
+    result: {
+        borderWidth:1,
+        margin:10,
+        borderRadius: 4,
+        backgroundColor: 'white',
+        width: 300,
+        height: 50,
+        fontSize: 25,
+        fontFamily: 'monospace',
+        backgroundColor:'#e5e0e0',
+        textAlign: 'center',
+        color: '#1183ca',
+        elevation: 15,
+        fontWeight: 'bold',
+        paddingVertical: 9,
+    },
+  });
