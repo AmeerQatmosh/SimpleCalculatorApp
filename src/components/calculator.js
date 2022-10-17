@@ -6,7 +6,7 @@ export default class Calculator extends React.Component {
       super(props);
       this.state={primary:0,secondary:0};
     }
-    Sum =() =>{
+    sum =() =>{
         var N1= parseInt(this.state.primary);
         var N2= parseInt(this.state.secondary);
         var Results = N1+N2;
@@ -14,30 +14,27 @@ export default class Calculator extends React.Component {
 
     }
     
-    Subtract =() =>{
+    subtract =() =>{
         var N1= parseInt(this.state.primary);
         var N2= parseInt(this.state.secondary);
         var Results = N1-N2;
         this.setState({myText: Results})
     }
 
-    Multiply =() =>{
+    multiply =() =>{
         var N1= parseInt(this.state.primary);
         var N2= parseInt(this.state.secondary);
         var Results = N1*N2;
         this.setState({myText: Results})
     }
 
-    Divide =() =>{
+    divide =() =>{
         var N1= parseInt(this.state.primary);
         var N2= parseInt(this.state.secondary);
         var Results = parseInt(N1/N2);
         this.setState({myText: Results})
     }
 
-    updateResult = () => {
-        this.setState({Results})
-     }
     render(){
         return (
 
@@ -54,20 +51,20 @@ export default class Calculator extends React.Component {
                 <Text style={styles.result}>
                   {this.state.myText}
                 </Text>
-                <View style={styles.operations}>
-                    <Pressable style={styles.button} onPress={this.Sum}>
+                <View>
+                    <Pressable style={styles.button} onPress={this.sum}>
                         <Text style={styles.text}>+</Text>
                     </Pressable>
 
-                    <Pressable style={styles.button} onPress={this.Subtract}>
+                    <Pressable style={styles.button} onPress={this.subtract}>
                         <Text style={styles.text}>-</Text>
                     </Pressable>
 
-                    <Pressable style={styles.button} onPress={this.Multiply}>
+                    <Pressable style={styles.button} onPress={this.multiply}>
                         <Text style={styles.text}>×</Text>
                     </Pressable>
 
-                    <Pressable style={styles.button} onPress={this.Divide}>
+                    <Pressable style={styles.button} onPress={this.divide}>
                         <Text style={styles.text}>÷</Text>
                     </Pressable>
                 </View>
@@ -90,8 +87,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#1183ca',
         fontSize: 20,
-
-
     },
     
     button: {
